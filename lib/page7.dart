@@ -53,12 +53,14 @@ class _Page7State extends State<Page7> {
   Future login() async {
     print(id);
     print(password);
+    // Work for lockers
+    var lockKey = value.substring(0, 2);
     // obtain shared preferences
     final prefs = await SharedPreferences.getInstance();
-    final locker = prefs.getBool('unlockNextFrom_page7') ?? false;
-    if (password.text == id || locker) {
+    final locker = prefs.getString('unlockNextFrom_page7') ?? "";
+    if (password.text == id || locker == lockKey) {
       // set value
-      await prefs.setBool('unlockNextFrom_page7', true);
+      await prefs.setString('unlockNextFrom_page7', lockKey);
       print("true");
       Navigator.push(
         context,
