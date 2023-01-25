@@ -1,9 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, unused_import
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/imagepage3.dart';
 
 import 'package:flutter_application_1/page2.dart';
 import 'package:flutter_application_1/page4.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Page3 extends StatefulWidget {
   String value;
@@ -50,11 +53,18 @@ class _Page3State extends State<Page3> {
   });
 
   TextEditingController password = TextEditingController();
-  var id = "12345";
+  var id = "pegasus";
   Future login() async {
     print(id);
     print(password);
-    if (password.text == id) {
+    // Work for lockers
+    var lockKey = value.substring(0, 2);
+    // obtain shared preferences
+    final prefs = await SharedPreferences.getInstance();
+    final locker = prefs.getString('unlockNextFrom_page3') ?? "";
+    if (password.text == id || locker == lockKey) {
+      // set value
+      await prefs.setString('unlockNextFrom_page3', lockKey);
       print("true");
       if (value != "Dum Dum") {
         Navigator.push(
@@ -86,6 +96,20 @@ class _Page3State extends State<Page3> {
     }
   }
 
+  bool _showImage = false;
+  Map<String, String> abc = {
+    "Johnny Silverhand": "assets/map1.png",
+    "Jackie Welles": "assets/map1.png",
+    "Judy Alvarez": "assets/map2.png",
+    "Panam Palmer": "assets/map2.png",
+    "Victor Vector": "assets/map3.png",
+    "Vincent": "assets/map3.png",
+    "Kerry Eurodyne": "assets/map4.png",
+    "Goro Takemura": "assets/map4.png",
+    "Dum Dum": "assets/map5.png",
+    "Evelyn Parker": "assets/map5.png"
+  };
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -94,7 +118,7 @@ class _Page3State extends State<Page3> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Enter a Password"),
+          title: Text("Solve the clue"),
         ),
         body: Center(
             child: Column(
@@ -127,15 +151,33 @@ class _Page3State extends State<Page3> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                onPressed: () {
-                  login();
-                },
-                child: Text("Next"),
-              ),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _showImage = !_showImage;
+                      });
+                    },
+                    child: Text("Toggle Map"),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      login();
+                    },
+                    child: Text("Next"),
+                  ),
+                ),
+              ],
+            ),
+            // Conditionally render the image
+            if (_showImage) Image.asset("${abc[value]}"),
           ],
         )),
       ),

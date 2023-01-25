@@ -5,6 +5,7 @@ import 'package:flutter_application_1/page2.dart';
 import 'package:flutter_application_1/page3.dart';
 import 'package:flutter_application_1/page4.dart';
 import 'package:flutter_application_1/page7.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Page8 extends StatefulWidget {
   String value;
@@ -51,12 +52,19 @@ class _Page8State extends State<Page8> {
   });
 
   TextEditingController password = TextEditingController();
-  var id = "12345";
+  var id = "pegasus";
   var image;
   Future login() async {
     print(id);
     print(password);
-    if (password.text == id) {
+    // Work for lockers
+    var lockKey = value.substring(0, 2);
+    // obtain shared preferences
+    final prefs = await SharedPreferences.getInstance();
+    final locker = prefs.getString('unlockNextFrom_imagepage') ?? "";
+    if (password.text == id || locker == lockKey) {
+      // set value
+      await prefs.setString('unlockNextFrom_imagepage', lockKey);
       print("true");
       if (value == "Panam Palmer") {
         Navigator.push(
@@ -72,63 +80,100 @@ class _Page8State extends State<Page8> {
           ),
         );
       }
-      if (value == "Judy Alvarez") {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Page3(
-                value: value,
-                clue1: clue1,
-                clue2: clue2,
-                clue3: clue3,
-                clue4: clue4,
-                clue5: clue5),
-          ),
-        );
-      }
+      // if (value == "Judy Alvarez") {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => Page3(
+      //           value: value,
+      //           clue1: clue1,
+      //           clue2: clue2,
+      //           clue3: clue3,
+      //           clue4: clue4,
+      //           clue5: clue5),
+      //     ),
+      //   );
+      // }
     }
   }
+
+  bool _showImage = false;
+  Map<String, String> abc = {
+    "Johnny Silverhand": "assets/map1.png",
+    "Jackie Welles": "assets/map1.png",
+    "Judy Alvarez": "assets/map2.png",
+    "Panam Palmer": "assets/map2.png",
+    "Victor Vector": "assets/map3.png",
+    "Vincent": "assets/map3.png",
+    "Kerry Eurodyne": "assets/map4.png",
+    "Goro Takemura": "assets/map4.png",
+    "Dum Dum": "assets/map5.png",
+    "Evelyn Parker": "assets/map5.png"
+  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Enter a Password"),
+        title: Text("Solve the clue"),
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: Image.asset("assets/image1.png"),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: password,
-              decoration: InputDecoration(
-                  // border: OutlineInputBorder(),
-                  label: Text("password", style: TextStyle(fontSize: 20.0))),
-                  obscureText: true,
+      body: SingleChildScrollView(
+        child: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 40.0,
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: ElevatedButton(
-              onPressed: () {
-                login();
-              },
-              child: Text("Next"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset("assets/image1.png"),
             ),
-          )
-        ],
-      )),
+            SizedBox(
+              height: 20.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: password,
+                decoration: InputDecoration(
+                    label: Text("password", style: TextStyle(fontSize: 20.0))),
+                obscureText: true,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _showImage = !_showImage;
+                      });
+                    },
+                    child: Text("Toggle Map"),
+                  ),
+                ),
+                if(value != "Judy Alvarez") Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      login();
+                    },
+                    child: Text("Next"),
+                  ),
+                ),
+              ],
+            ),
+            // Conditionally render the image
+            if (_showImage) Image.asset("${abc[value]}"),
+          ],
+        )),
+      ),
     );
   }
 }
