@@ -81,20 +81,20 @@ class _Page9State extends State<Page9> {
           ),
         );
       }
-      if (value == "Victor Vector") {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Page3(
-                value: value,
-                clue1: clue1,
-                clue2: clue2,
-                clue3: clue3,
-                clue4: clue4,
-                clue5: clue5),
-          ),
-        );
-      }
+      // if (value == "Victor Vector") {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => Page3(
+      //           value: value,
+      //           clue1: clue1,
+      //           clue2: clue2,
+      //           clue3: clue3,
+      //           clue4: clue4,
+      //           clue5: clue5),
+      //     ),
+      //   );
+      // }
     }
   }
 
@@ -159,7 +159,7 @@ class _Page9State extends State<Page9> {
                     child: Text("Toggle Map"),
                   ),
                 ),
-                Container(
+                if (value != "Victor Vector")Container(
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     onPressed: () {

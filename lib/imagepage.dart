@@ -80,20 +80,20 @@ class _Page8State extends State<Page8> {
           ),
         );
       }
-      if (value == "Judy Alvarez") {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Page3(
-                value: value,
-                clue1: clue1,
-                clue2: clue2,
-                clue3: clue3,
-                clue4: clue4,
-                clue5: clue5),
-          ),
-        );
-      }
+      // if (value == "Judy Alvarez") {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => Page3(
+      //           value: value,
+      //           clue1: clue1,
+      //           clue2: clue2,
+      //           clue3: clue3,
+      //           clue4: clue4,
+      //           clue5: clue5),
+      //     ),
+      //   );
+      // }
     }
   }
 
@@ -158,7 +158,7 @@ class _Page8State extends State<Page8> {
                     child: Text("Toggle Map"),
                   ),
                 ),
-                Container(
+                if(value != "Judy Alvarez") Container(
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     onPressed: () {

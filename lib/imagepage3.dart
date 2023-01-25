@@ -160,7 +160,7 @@ class _Page10State extends State<Page10> {
                     child: Text("Toggle Map"),
                   ),
                 ),
-                Container(
+                if (value != "Evelyn Parker")Container(
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     onPressed: () {
