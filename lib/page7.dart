@@ -140,15 +140,15 @@ class _Page7State extends State<Page7> {
                     child: Text("Toggle Map"),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      login();
-                    },
-                    child: Text("Next"),
-                  ),
-                ),
+                // Container(
+                //   margin: EdgeInsets.all(10),
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       login();
+                //     },
+                //     child: Text("Next"),
+                //   ),
+                // ),
               ],
             ),
             // Conditionally render the image
