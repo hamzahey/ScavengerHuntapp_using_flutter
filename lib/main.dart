@@ -76,11 +76,6 @@ class InstructionPage extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.arrow_forward),
                     title: Text(
-                        "Keep in mind that if at any point you close your app, all progress will be lost and the app will reset"),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.arrow_forward),
-                    title: Text(
                         "If at any point you want to checkout your map again just click on the display button"),
                   ),
                 ],
@@ -101,10 +96,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Image.asset("assets/SBXlogo.png"),
-            // ),
+            Image(
+              image: AssetImage("assets/SBXlogo.png"),
+              height: 25,
+              width: 25,
+            ),
             SizedBox(width: 10),
             Text(
               "SCIENCE BEE' X",
@@ -116,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

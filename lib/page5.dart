@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/page2.dart';
 import 'package:flutter_application_1/page6.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Page5 extends StatefulWidget {
   String value;
@@ -53,7 +55,12 @@ class _Page5State extends State<Page5> {
   Future login() async {
     print(id);
     print(password);
-    if (password.text == id) {
+    // obtain shared preferences
+    final prefs = await SharedPreferences.getInstance();
+    final locker = prefs.getBool('unlockNextFrom_page5') ?? false;
+    if (password.text == id || locker) {
+      // set value
+      await prefs.setBool('unlockNextFrom_page5', true);
       print("true");
       Navigator.push(
         context,

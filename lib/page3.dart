@@ -5,6 +5,9 @@ import 'package:flutter_application_1/imagepage3.dart';
 import 'package:flutter_application_1/page2.dart';
 import 'package:flutter_application_1/page4.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+
 class Page3 extends StatefulWidget {
   String value;
   String clue1;
@@ -54,7 +57,12 @@ class _Page3State extends State<Page3> {
   Future login() async {
     print(id);
     print(password);
-    if (password.text == id) {
+    // obtain shared preferences
+    final prefs = await SharedPreferences.getInstance();
+    final locker = prefs.getBool('unlockNextFrom_page3') ?? false;
+    if (password.text == id || locker) {
+      // set value
+      await prefs.setBool('unlockNextFrom_page3', true);
       print("true");
       if (value != "Dum Dum") {
         Navigator.push(

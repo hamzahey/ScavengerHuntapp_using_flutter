@@ -31,6 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^2.0.17
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -80,6 +81,7 @@ flutter:
     - assets/PanamPalmer.png
     - assets/V.png
     - assets/VictorVector.png
+    - assets/SBXlogo.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
