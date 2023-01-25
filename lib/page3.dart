@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, unused_import
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/imagepage3.dart';
 
@@ -50,7 +50,7 @@ class _Page3State extends State<Page3> {
   });
 
   TextEditingController password = TextEditingController();
-  var id = "12345";
+  var id = "pegasus";
   Future login() async {
     print(id);
     print(password);
@@ -86,6 +86,20 @@ class _Page3State extends State<Page3> {
     }
   }
 
+  bool _showImage = false;
+  Map<String, String> abc = {
+    "Johnny Silverhand": "assets/map1.png",
+    "Jackie Welles": "assets/map1.png",
+    "Judy Alvarez": "assets/map2.png",
+    "Panam Palmer": "assets/map2.png",
+    "Victor Vector": "assets/map3.png",
+    "V": "assets/map3.png",
+    "Kerry Eurodyne": "assets/map4.png",
+    "Goro Takemura": "assets/map4.png",
+    "Dum Dum": "assets/map5.png",
+    "Evelyn Parker": "assets/map5.png"
+  };
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -94,7 +108,7 @@ class _Page3State extends State<Page3> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Enter a Password"),
+          title: Text("Solve the clue"),
         ),
         body: Center(
             child: Column(
@@ -127,15 +141,33 @@ class _Page3State extends State<Page3> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                onPressed: () {
-                  login();
-                },
-                child: Text("Next"),
-              ),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _showImage = !_showImage;
+                      });
+                    },
+                    child: Text("Toggle Map"),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      login();
+                    },
+                    child: Text("Next"),
+                  ),
+                ),
+              ],
+            ),
+            // Conditionally render the image
+            if (_showImage) Image.asset("${abc[value]}"),
           ],
         )),
       ),

@@ -52,7 +52,7 @@ class _Page6State extends State<Page6> {
   });
 
   TextEditingController password = TextEditingController();
-  var id = "12345";
+  var id = "pegasus";
   Future login() async {
     print(id);
     print(password);
@@ -117,49 +117,85 @@ class _Page6State extends State<Page6> {
     }
   }
 
+  bool _showImage = false;
+  Map<String, String> abc = {
+    "Johnny Silverhand": "assets/map1.png",
+    "Jackie Welles": "assets/map1.png",
+    "Judy Alvarez": "assets/map2.png",
+    "Panam Palmer": "assets/map2.png",
+    "Victor Vector": "assets/map3.png",
+    "V": "assets/map3.png",
+    "Kerry Eurodyne": "assets/map4.png",
+    "Goro Takemura": "assets/map4.png",
+    "Dum Dum": "assets/map5.png",
+    "Evelyn Parker": "assets/map5.png"
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Enter a Password"),
+        title: Text("Solve the clue"),
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(clue4,
-            textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 25.0)),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: password,
-              decoration: InputDecoration(
-                  // border: OutlineInputBorder(), 
-                  label: Text("password", style: TextStyle(fontSize: 20.0))),
-            obscureText: true,
+      body: SingleChildScrollView(
+        child: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 40.0,
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: ElevatedButton(
-              onPressed: () {
-                login();
-              },
-              child: Text("Next"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(clue4,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 25.0)),
             ),
-          )
-        ],
-      )),
+            SizedBox(
+              height: 20.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: password,
+                decoration: InputDecoration(
+                    label: Text("password", style: TextStyle(fontSize: 20.0))),
+                obscureText: true,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _showImage = !_showImage;
+                      });
+                    },
+                    child: Text("Toggle Map"),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      login();
+                    },
+                    child: Text("Next"),
+                  ),
+                ),
+              ],
+            ),
+            // Conditionally render the image
+            if (_showImage) Image.asset("${abc[value]}"),
+          ],
+        )),
+      ),
     );
   }
 }
