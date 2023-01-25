@@ -67,7 +67,7 @@ class _Page9State extends State<Page9> {
       // set value
       await prefs.setString('unlockNextFrom_imagepage2', lockKey);
       print("true");
-      if (value == "V") {
+      if (value == "Vincent") {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -105,7 +105,7 @@ class _Page9State extends State<Page9> {
     "Judy Alvarez": "assets/map2.png",
     "Panam Palmer": "assets/map2.png",
     "Victor Vector": "assets/map3.png",
-    "V": "assets/map3.png",
+    "Vincent": "assets/map3.png",
     "Kerry Eurodyne": "assets/map4.png",
     "Goro Takemura": "assets/map4.png",
     "Dum Dum": "assets/map5.png",

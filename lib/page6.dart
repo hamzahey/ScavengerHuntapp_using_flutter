@@ -133,7 +133,7 @@ class _Page6State extends State<Page6> {
     "Judy Alvarez": "assets/map2.png",
     "Panam Palmer": "assets/map2.png",
     "Victor Vector": "assets/map3.png",
-    "V": "assets/map3.png",
+    "Vincent": "assets/map3.png",
     "Kerry Eurodyne": "assets/map4.png",
     "Goro Takemura": "assets/map4.png",
     "Dum Dum": "assets/map5.png",

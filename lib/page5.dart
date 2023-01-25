@@ -59,7 +59,7 @@ class _Page5State extends State<Page5> {
     var lockKey = value.substring(0, 2);
     // obtain shared preferences
     final prefs = await SharedPreferences.getInstance();
-    final locker = prefs.getBool('unlockNextFrom_page5') ?? "";
+    final locker = prefs.getString('unlockNextFrom_page5') ?? "";
     if (password.text == id || locker == lockKey) {
       // set value
       await prefs.setString('unlockNextFrom_page5', lockKey);
@@ -86,7 +86,7 @@ class _Page5State extends State<Page5> {
     "Judy Alvarez": "assets/map2.png",
     "Panam Palmer": "assets/map2.png",
     "Victor Vector": "assets/map3.png",
-    "V": "assets/map3.png",
+    "Vincent": "assets/map3.png",
     "Kerry Eurodyne": "assets/map4.png",
     "Goro Takemura": "assets/map4.png",
     "Dum Dum": "assets/map5.png",

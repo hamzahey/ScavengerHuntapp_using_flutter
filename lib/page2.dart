@@ -360,7 +360,7 @@ class _AvatarPageState extends State<AvatarPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  value = "V";
+                  value = "Vincent"; // Renaming V to Vincent to comply with some logic. Propagating this change further downstream. No Affects.
                   clue1 = "assets/image2.png";
                   clue2 = "Meet me at the bar and we'll try working it out";
                   clue3 = "It's a three in one arena so take your pick";
